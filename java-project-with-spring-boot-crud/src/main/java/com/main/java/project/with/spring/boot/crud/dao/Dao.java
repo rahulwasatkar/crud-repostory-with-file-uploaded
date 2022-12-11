@@ -3,6 +3,7 @@ package com.main.java.project.with.spring.boot.crud.dao;
 import java.util.List;
 
 import com.main.java.project.with.spring.boot.crud.entity.Product;
+import com.main.java.project.with.spring.boot.crud.model.ProductSupplier;
 
 public interface Dao {
 	public boolean saveproduct(Product product);
@@ -13,4 +14,5 @@ public interface Dao {
 	public List<Product> getmacpriceproduct();
 	public List<Product> getproductByname(String productName);
 	public int saveList(List<Product> product); 
+	public ProductSupplier getProductWithSupplier(int productId);
 }

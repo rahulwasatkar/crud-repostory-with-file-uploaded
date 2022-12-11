@@ -16,15 +16,21 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.main.java.project.with.spring.boot.crud.dao.DaoLayer;
 import com.main.java.project.with.spring.boot.crud.entity.Product;
+import com.main.java.project.with.spring.boot.crud.model.ProductSupplier;
+import com.main.java.project.with.spring.boot.crud.model.Supplier;
 
 @Service
 public class Service_impl implements ServiceLayer {
 	@Autowired
 	DaoLayer dao;
+	
+	@Autowired
+	RestTemplate restTemplate;
 	int shitCount = 0;
 
 	@Override
@@ -154,6 +160,19 @@ public class Service_impl implements ServiceLayer {
 		}
 
 		return "total sheetcount  ="+shitCount +"and total record inserted = "+count;
+	}
+
+	@Override
+	public ProductSupplier getProductWithSupplier(int productId) {
+		
+		ProductSupplier productSupplier = new ProductSupplier();
+		Product product = getproductById(productId);
+		productSupplier.setProduct(product);
+		Supplier supplier = restTemplate.getForObject("http://localhost:9001/getsupplier/"+product.getSupllierId(), Supplier.class);
+		productSupplier.setSupplier(supplier);
+		
+		
+		return productSupplier;
 	}
 
 }

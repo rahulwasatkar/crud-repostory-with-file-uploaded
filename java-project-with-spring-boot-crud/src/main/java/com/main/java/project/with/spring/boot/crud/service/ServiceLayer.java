@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.main.java.project.with.spring.boot.crud.entity.Product;
+import com.main.java.project.with.spring.boot.crud.model.ProductSupplier;
 
 public interface ServiceLayer {
 	public boolean saveproduct(Product product);
@@ -17,6 +18,6 @@ public interface ServiceLayer {
 	public List<Product> getmacpriceproduct();
 	public List<Product> getproductByname(String productName);
 	public String getfile(MultipartFile file,HttpSession session);
-
+    public ProductSupplier getProductWithSupplier(int productId);
 
 }

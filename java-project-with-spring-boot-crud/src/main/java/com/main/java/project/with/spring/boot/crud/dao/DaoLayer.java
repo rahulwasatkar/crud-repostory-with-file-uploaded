@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.main.java.project.with.spring.boot.crud.entity.Product;
+import com.main.java.project.with.spring.boot.crud.model.ProductSupplier;
 
 @Repository
 public class DaoLayer implements Dao {
@@ -162,6 +163,12 @@ public class DaoLayer implements Dao {
 		}
 
 		return cnt;
+	}
+
+	@Override
+	public ProductSupplier getProductWithSupplier(int productId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

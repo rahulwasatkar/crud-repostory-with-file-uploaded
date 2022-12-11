@@ -23,11 +23,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.main.java.project.with.spring.boot.crud.entity.Product;
 import com.main.java.project.with.spring.boot.crud.exception.ProductAlreadyExistExceptions;
 import com.main.java.project.with.spring.boot.crud.exception.ProductNotfoundException;
+import com.main.java.project.with.spring.boot.crud.model.ProductSupplier;
 import com.main.java.project.with.spring.boot.crud.service.ServiceLayer;
 import com.main.java.project.with.spring.boot.crud.service.ServiceLayer;
 
 @RestController
-//@RequestMapping("/product")
+@RequestMapping("/product")
 public class Controller {
 
 	@Autowired
@@ -110,5 +111,15 @@ public class Controller {
 		String totalcount = service.getfile(file, session);
 
 		return new ResponseEntity<String>(totalcount, HttpStatus.OK);
+	}
+	
+	@GetMapping("/getproductsupplier/{productId}")
+	public ResponseEntity<ProductSupplier> getProductSupplier(@PathVariable int productId){
+		ProductSupplier productSupplier = service.getProductWithSupplier(productId);
+		if(productSupplier!=null) {
+		return new ResponseEntity<ProductSupplier>(productSupplier,HttpStatus.OK);
+	}else {
+		return new ResponseEntity<ProductSupplier>(HttpStatus.OK);
+	}
 	}
 }
